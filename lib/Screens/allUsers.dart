@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projcyberbullying/Screens/form.dart';
 import 'package:projcyberbullying/Screens/userOptions.dart';
 
-
 class AllUsersHomePage extends StatefulWidget{
 
   @override
@@ -32,7 +31,7 @@ class _AllUsersHomePageState extends State<AllUsersHomePage> {
       body: PageView(
         controller: pc,
         children: [
-          FormDemanda(),
+          FormReg(),
           MoreOptions(),
         ],
         onPageChanged: setPaginaAtual,
@@ -50,6 +49,5 @@ class _AllUsersHomePageState extends State<AllUsersHomePage> {
         backgroundColor: Colors.grey[200],
       ),
     );
-    throw UnimplementedError();
   }
 }

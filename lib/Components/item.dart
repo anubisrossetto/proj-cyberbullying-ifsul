@@ -5,10 +5,9 @@ import 'package:projcyberbullying/Screens/EditarInfo.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 
-
-class ItemDemanda extends StatelessWidget {
-  final Stream<QuerySnapshot> propostasFeitas =
-  FirebaseFirestore.instance.collection('Demandas').snapshots();
+class Item extends StatelessWidget {
+  final Stream<QuerySnapshot> registros =
+  FirebaseFirestore.instance.collection('registros').snapshots();
 
 
   @override
@@ -16,7 +15,7 @@ class ItemDemanda extends StatelessWidget {
     // TODO: implement build
 
     return StreamBuilder<QuerySnapshot> (
-      stream: propostasFeitas,
+      stream: registros,
       builder: (
           BuildContext context,
           AsyncSnapshot<QuerySnapshot> snapshot,
@@ -41,13 +40,12 @@ class ItemDemanda extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               itemBuilder: (context, index) {
 
-                //Pegando as informações dos documentos do firebase da coleção Demandas
-                final infoTitulo = data.docs[index]['Titulo_proposta'];
-                final infoTempo = data.docs[index]['Tempo_Necessario'];
+                //Pegando as informações dos documentos do firebase da coleção registros
+                final infoTitulo = data.docs[index]['titulo'];
+                final infoDataHora = data.docs[index]['dataHora'].toString();
                 final infoResumo = data.docs[index]['Resumo'];
-                final infoObjetivo = data.docs[index]['Objetivo'];
-                final infoContrapartida = data.docs[index]['Contrapartida'];
-                final infoResutadosEsperados = data.docs[index]['Resutados_Esperados'];
+                // ignore: unused_local_variable
+                final infoCid = data.docs[index]['cid'];
                 final updateDados = snapshot.data.docs[index];
 
                 return AnimationConfiguration.staggeredList(
@@ -75,25 +73,25 @@ class ItemDemanda extends StatelessWidget {
                                 ),
                                 child: ListTile(
                                     leading: const Icon(Icons.add_circle_outline),
-                                    title: Text(data.docs[index]['Titulo_proposta']),
-                                    subtitle: Text(data.docs[index]['Tempo_Necessario']),
+                                    title: Text(data.docs[index]['titulo']),
+                                    subtitle: Text(data.docs[index]['dataHora'].toString()),
                                     trailing: SizedBox(
                                       width: 50,
                                       child: Row(
                                         children: <Widget>[
                                           IconButton (
                                             icon: const Icon(Icons.edit, color: Colors.green, size: 32),
-                                            tooltip: 'Editar proposta',
+                                            tooltip: 'Editar',
                                             onPressed: () {
 
                                               final Future future =
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return EditarFormInfo(infoTitulo, infoTempo, infoResumo, infoObjetivo, infoContrapartida, infoResutadosEsperados, updateDados);
+                                                return EditarFormInfo(infoTitulo, infoResumo,  infoDataHora.toString(), updateDados);
                                               }));
 
-                                              future.then((demandaAtualizada) {
-                                                debugPrint("$demandaAtualizada");
-                                                debugPrint('A proposta foi alterada');
+                                              future.then((reg) {
+                                                debugPrint("$reg");
+                                                debugPrint('Dados atualizados');
                                               });
 
                                             },

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projcyberbullying/Screens/login.dart';
@@ -133,13 +131,8 @@ class AppBarLogo extends StatelessWidget {
     // TODO: implement build
     return  Column(
       children: [
-        Image.asset(
-          'assets/image/logo.png',
-          width: 240,
-        ),
-        const SizedBox(height: 20),
         Text(
-          'Escola de Extensão do IFSul',
+          'Registro de Provas de Cyberbullying',
           style: GoogleFonts.cabin(textStyle: styleTextTitle),
         ),
       ],
@@ -198,19 +191,16 @@ class LogoWelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
     // TODO: implement build
     return  Container(
       padding: const EdgeInsets.only(top: 50),
       child: Column(
         children: [
-          Image.asset(
-            'assets/image/logo_verde.png',
-            width: size.width * 0.9,
-          ),
           const SizedBox(height: 20),
           Text(
-            'Escola de Extensão do IFSul',
+            'Registro Provas',
             style: GoogleFonts.cabin(textStyle: styleTextTitle),
           ),
         ],

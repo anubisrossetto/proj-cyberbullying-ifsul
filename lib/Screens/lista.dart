@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:projcyberbullying/Components/item_demanda.dart';
+import 'package:projcyberbullying/Components/item.dart';
 
-class ListaDemanda extends StatelessWidget {
+class ListaReg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Propostas criadas"),
+        title: const Text("Registros"),
         centerTitle: true,
 
       ),
 
-      body: ItemDemanda(),
+      body: Item(),
     );
-    throw UnimplementedError();
   }
 }
 

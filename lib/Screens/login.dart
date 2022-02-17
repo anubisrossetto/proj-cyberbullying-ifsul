@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 150,
+          toolbarHeight: 100,
           title: AppBarLogo(styleTextTitle),
           centerTitle: true,
         ),
@@ -135,46 +135,11 @@ class _LoginState extends State<Login> {
                   child: Divisor()
               ),
 
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    IconesMedia(
-                        'assets/image/logo_google.png',
-                            () {
-                          debugPrint('Você logou com o google');
-
-                          userDao.signInWithGoogle();
-                        },
-                        'Cadastre-se com o Google',
-                      18,
-                      5
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: IconesMedia(
-                          'assets/image/logo_facebook.png',
-                              () {
-                            debugPrint('Você logou com o facebook');
-
-                            userDao.signInWithFacebook();
-                          },
-                          'Cadastre-se com o Facebook',
-                        0,
-                        5
-                      ),
-                    )
-                  ],
-                ),
-              )
             ],
           ),
         )
       );
   }
-
 
 
 }

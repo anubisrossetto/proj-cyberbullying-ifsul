@@ -19,11 +19,8 @@ class MoreOptions extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 150,
-        title: Image.asset(
-          'assets/image/logo.png',
-          width: 240,
-        ),
+        toolbarHeight: 100,
+        title: Text("Nome app"),
         centerTitle: true,
       ),
 
@@ -55,7 +52,7 @@ class MoreOptions extends StatelessWidget {
 
                   const SizedBox(height: 10),
 
-                  Options(Icons.feedback_outlined , 'Retornos', 'Visualize atualizações sobre a sua demanda', () {
+                  Options(Icons.feedback_outlined , 'Mais Informações', 'Consulte mais informações de como funciona o registro', () {
                     debugPrint("Página retorno");
                   },
                       Theme.of(context).colorScheme.primary
@@ -63,10 +60,10 @@ class MoreOptions extends StatelessWidget {
 
                   const SizedBox(height: 10),
 
-                  Options(Icons.list , 'Minhas Demandas', 'Visualize suas demandas cadastradas', () {
-                    debugPrint("Página ListaDemandas");
+                  Options(Icons.list , 'Meus Registros', 'Visualize seus registros de provas', () {
+                    debugPrint("Página Lista");
                     Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ListaDemanda();
+                    return ListaReg();
                     }));
 
                   },
