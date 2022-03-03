@@ -14,8 +14,8 @@ class Item extends StatelessWidget {
     final userDao = Provider.of<UserDao>(context, listen: false);
 
     final Stream<QuerySnapshot> registros =
-    FirebaseFirestore.instance.collection('registros').where('userID', isEqualTo: userDao.userId()).snapshots();
-
+    FirebaseFirestore.instance.collection('registros').snapshots();
+//.where('userID', isEqualTo: userDao.userId()).
 
     return StreamBuilder<QuerySnapshot> (
       stream: registros,

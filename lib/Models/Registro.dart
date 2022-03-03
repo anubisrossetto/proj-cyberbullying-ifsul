@@ -6,6 +6,7 @@ class Registro{
   final String datahora;
   final String cid;
   final String userId;
+  final String nomeArquivo;
 
   Registro(
       this.id,
@@ -13,7 +14,8 @@ class Registro{
       this.resumo,
       this.datahora,
       this.cid,
-      this.userId);
+      this.userId,
+      this.nomeArquivo);
 
   @override
   String toString() {

@@ -138,7 +138,7 @@ class EditarFormInfoState extends State<EditarFormInfo> {
     final userDao = Provider.of<UserDao>(context, listen: false);
 
     final registro = new Registro("", _controladorTitulo.text,
-        _controladorResumo.text, widget.dataHora, "", userDao.userId());
+        _controladorResumo.text, widget.dataHora, "", userDao.userId(), "");
 
     widget.updateDados.reference
         .update({

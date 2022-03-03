@@ -105,6 +105,8 @@ class FormRegState extends State<FormReg> {
     //Adicionando um novo documento a nossa coleção
 
     if (result != null) {
+
+      // aqui começa a barra progresso
       PlatformFile file = result.files.first;
       var request = http.MultipartRequest(
           "POST", Uri.parse('https://api.nft.storage/upload'));
@@ -131,7 +133,10 @@ class FormRegState extends State<FormReg> {
         'dataHora': dataHora,
         'cid': cid,
         'userId': userDao.userId(),
+        'nomeArq' : file.name
       }).then((value) {
+
+        // finaliza a barra
         const SnackBar snackBar =
             SnackBar(content: Text("Seu registro foi realizado com sucesso! "));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
