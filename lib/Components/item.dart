@@ -3,16 +3,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:projcyberbullying/Screens/EditarInfo.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
+import 'package:provider/provider.dart';
+import 'package:projcyberbullying/Data/User_dao.dart';
 
 class Item extends StatelessWidget {
-  final Stream<QuerySnapshot> registros =
-  FirebaseFirestore.instance.collection('registros').snapshots();
-
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    final userDao = Provider.of<UserDao>(context, listen: false);
+
+    final Stream<QuerySnapshot> registros =
+    FirebaseFirestore.instance.collection('registros').where('userID', isEqualTo: userDao.userId()).snapshots();
+
 
     return StreamBuilder<QuerySnapshot> (
       stream: registros,

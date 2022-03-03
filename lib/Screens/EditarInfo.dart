@@ -4,27 +4,27 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projcyberbullying/Models/Registro.dart';
 import 'package:projcyberbullying/Screens/lista.dart';
 import 'package:conditional_questions/conditional_questions.dart';
+import 'package:projcyberbullying/Data/User_dao.dart';
+import 'package:provider/provider.dart';
 
 class EditarFormInfo extends StatefulWidget {
-
   final String titulo;
   final String resumo;
   final String dataHora;
 
   final QueryDocumentSnapshot updateDados;
 
-  const EditarFormInfo(this.titulo, this.resumo, this.dataHora, this.updateDados);
+  const EditarFormInfo(
+      this.titulo, this.resumo, this.dataHora, this.updateDados);
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return EditarFormInfoState();
   }
-
 }
 
 class EditarFormInfoState extends State<EditarFormInfo> {
-
   final TextEditingController _controladorTitulo = TextEditingController();
   final TextEditingController _controladorResumo = TextEditingController();
 
@@ -40,12 +40,12 @@ class EditarFormInfoState extends State<EditarFormInfo> {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text("Atualizar"),
+        title: const Text("Atualizar"),
         elevation: 0,
         actions: [
           SizedBox(
             width: 80,
-            child: IconButton (
+            child: IconButton(
               icon: const Icon(Icons.delete, color: Colors.redAccent, size: 32),
               tooltip: 'Remover registro',
               onPressed: () {
@@ -53,44 +53,47 @@ class EditarFormInfoState extends State<EditarFormInfo> {
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Excluir registro'),
-                      content: const Text('Você deseja excluir este registro?'),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-                      actions: <Widget> [
-                        TextButton(
-                          onPressed: (){
-                            //Deleting the data from the firebase
-                            debugPrint('Exclusão realizada');
-                            widget.updateDados.reference.delete();
+                      return AlertDialog(
+                        title: const Text('Excluir registro'),
+                        content:
+                            const Text('Você deseja excluir este registro?'),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.0)),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              //Deleting the data from the firebase
+                              debugPrint('Exclusão realizada');
+                              widget.updateDados.reference.delete();
 
-                            //Going back to the main page
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return ListaReg();
-                            }));
+                              //Going back to the main page
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return ListaReg();
+                              }));
 
-                            //SnackBar
-                            const SnackBar snackBar = SnackBar(content: Text("O registro foi excluído com sucesso! "));
-                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          },
-                          child: const Text('Sim'),
-                        ),
-
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            debugPrint('Operação não realizada');
-                          },
-                          child: const Text('Não'),
-                        ),
-                      ],
-                    );
-                  }
-                );
+                              //SnackBar
+                              const SnackBar snackBar = SnackBar(
+                                  content: Text(
+                                      "O registro foi excluído com sucesso! "));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            },
+                            child: const Text('Sim'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              debugPrint('Operação não realizada');
+                            },
+                            child: const Text('Não'),
+                          ),
+                        ],
+                      );
+                    });
               },
             ),
           )
-
         ],
       ),
       body: SingleChildScrollView(
@@ -98,54 +101,60 @@ class EditarFormInfoState extends State<EditarFormInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150),
-            Editor(_controladorResumo, "Faça uma breve descrição",
-                "Explique da melhor forma que conseguir sobre o que se trata o registro", 5, _valida, 600),
+            Editor(
+                _controladorResumo,
+                "Faça uma breve descrição",
+                "Explique da melhor forma que conseguir sobre o que se trata o registro",
+                5,
+                _valida,
+                600),
             SizedBox(
               height: 40,
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: (){
-                    setState((){
-                      _controladorTitulo.text.isEmpty ? _valida = true : _valida = false;
-                      _controladorResumo.text.isEmpty ? _valida = true : _valida = false;
+                  onPressed: () {
+                    setState(() {
+                      _controladorTitulo.text.isEmpty
+                          ? _valida = true
+                          : _valida = false;
+                      _controladorResumo.text.isEmpty
+                          ? _valida = true
+                          : _valida = false;
                     });
-                    if(!_valida){
-                      _criar(context);
-
-                      widget.updateDados
-                          .reference
-                          .update({
-                        'titulo': _controladorTitulo.text,
-                        'resumo': _controladorResumo.text,
-                      }).then((value) => debugPrint("Seu registro foi atualizado no banco de dados"))
-                          .catchError((error) => debugPrint("Ocorreu um erro gravar dados: $error"));
+                    if (!_valida) {
+                      _alterar(context);
                     }
                   },
-                  child: const Text("SALVAR MUDANÇAS")
-              ),
+                  child: const Text("SALVAR MUDANÇAS")),
             ),
           ],
         ),
       ),
     );
-
   }
 
-  void _criar(BuildContext context) {
+  void _alterar(BuildContext context) {
+    final userDao = Provider.of<UserDao>(context, listen: false);
 
     final registro = new Registro("", _controladorTitulo.text,
-         _controladorResumo.text, widget.dataHora, "");
+        _controladorResumo.text, widget.dataHora, "", userDao.userId());
+
+    widget.updateDados.reference
+        .update({
+          'titulo': _controladorTitulo.text,
+          'resumo': _controladorResumo.text,
+        })
+        .then((value) =>
+            debugPrint("Seu registro foi atualizado no banco de dados"))
+        .catchError(
+            (error) => debugPrint("Ocorreu um erro gravar dados: $error"));
 
     Navigator.pop(context, registro);
 
     //SnackBar
-    const SnackBar snackBar = SnackBar(content: Text("O registro foi alterado com sucesso! "));
+    const SnackBar snackBar =
+        SnackBar(content: Text("O registro foi alterado com sucesso! "));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
   }
 }
-
-
-

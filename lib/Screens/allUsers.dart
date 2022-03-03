@@ -10,8 +10,9 @@ class AllUsersHomePage extends StatefulWidget{
 
 class _AllUsersHomePageState extends State<AllUsersHomePage> {
 
-  int paginaAtual = 0;
-  PageController pc;
+  int paginaAtual = 0; // página inicial
+  PageController pc;// comentário teste
+
 
   @override
   void initState() {
