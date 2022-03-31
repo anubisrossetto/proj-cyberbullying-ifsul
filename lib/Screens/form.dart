@@ -23,7 +23,7 @@ class FormRegState extends State<FormReg> {
   CollectionReference registros =
       FirebaseFirestore.instance.collection('registros');
   FilePickerResult result;
-
+  bool _isLoading = false;
   String optionSelected;
 
   final style = const TextStyle(fontSize: 20, fontWeight: FontWeight.w200);
@@ -93,6 +93,7 @@ class FormRegState extends State<FormReg> {
                   },
                   child: const Text("CONFIRMAR")),
             ),
+            _isLoading ? LinearProgressIndicator() : Container(),
           ],
         ),
       ),
@@ -105,7 +106,9 @@ class FormRegState extends State<FormReg> {
     //Adicionando um novo documento a nossa coleção
 
     if (result != null) {
-
+      setState(() {
+        _isLoading = true;
+      });
       // aqui começa a barra progresso
       PlatformFile file = result.files.first;
       var request = http.MultipartRequest(
@@ -146,6 +149,9 @@ class FormRegState extends State<FormReg> {
           SnackBar(content: Text("Problema ao registrar documento "));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+    setState(() {
+      _isLoading = false;
+    });
 
     //Limpando os campos após a criação da proposta
     _controladorTitulo.text = '';
