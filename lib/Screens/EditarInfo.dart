@@ -11,11 +11,13 @@ class EditarFormInfo extends StatefulWidget {
   final String titulo;
   final String resumo;
   final String dataHora;
+  final String cid;
+  final String arq;
 
   final QueryDocumentSnapshot updateDados;
 
   const EditarFormInfo(
-      this.titulo, this.resumo, this.dataHora, this.updateDados);
+      this.titulo, this.resumo, this.dataHora, this.cid, this.arq, this.updateDados);
 
   @override
   State<StatefulWidget> createState() {
@@ -34,9 +36,10 @@ class EditarFormInfoState extends State<EditarFormInfo> {
   Widget build(BuildContext context) {
     // TODO: implement build
 
+
     //Replacing the spaces with the information from the card -> Retornando os valores para os campos de texto
     _controladorTitulo.text = widget.titulo;
-    _controladorResumo.text = widget.resumo;
+    _controladorResumo.text = widget.resumo + "  - " + widget.cid + "  -  "+ widget.arq;
 
     return Scaffold(
       appBar: AppBar(

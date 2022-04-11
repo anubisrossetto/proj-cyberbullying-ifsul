@@ -47,6 +47,8 @@ class Item extends StatelessWidget {
                 final infoTitulo = data.docs[index]['titulo'];
                 final infoDataHora = data.docs[index]['dataHora'].toString();
                 final infoResumo = data.docs[index]['Resumo'];
+               // final infoCid = data.docs[index]['cid'];
+                final infoArq = data.docs[index]['nomeArq'];
                 // ignore: unused_local_variable
                 final infoCid = data.docs[index]['cid'];
                 final updateDados = snapshot.data.docs[index];
@@ -89,7 +91,8 @@ class Item extends StatelessWidget {
 
                                               final Future future =
                                               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                                return EditarFormInfo(infoTitulo, infoResumo,  infoDataHora.toString(), updateDados);
+                                                return EditarFormInfo(infoTitulo, infoResumo,
+                                                    infoDataHora.toString(),infoCid, infoArq, updateDados);
                                               }));
 
                                               future.then((reg) {
