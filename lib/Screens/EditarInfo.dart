@@ -101,37 +101,35 @@ class EditarFormInfoState extends State<EditarFormInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150),
+            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150, true),
             Editor(
                 _controladorResumo,
                 "Faça uma breve descrição",
                 "Explique da melhor forma que conseguir sobre o que se trata o registro",
                 5,
                 _valida,
-                600),
-            SizedBox(
-              height: 40,
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _controladorTitulo.text.isEmpty
-                          ? _valida = true
-                          : _valida = false;
-                      _controladorResumo.text.isEmpty
-                          ? _valida = true
-                          : _valida = false;
-                    });
-                    if (!_valida) {
-                      _alterar(context);
-                    }
-                  },
-                  child: const Text("SALVAR MUDANÇAS")),
-            ),
+                600, true),
+
+
           ],
         ),
       ),
-    );
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              _controladorTitulo.text.isEmpty
+                  ? _valida = true
+                  : _valida = false;
+              _controladorResumo.text.isEmpty
+                  ? _valida = true
+                  : _valida = false;
+            });
+            if (!_valida) {
+              _alterar(context);
+            }
+          },
+          backgroundColor: Colors.green,
+          child: const Icon(Icons.save)),    );
   }
 
   void _alterar(BuildContext context) {

@@ -20,6 +20,7 @@ class FormReg extends StatefulWidget {
 class FormRegState extends State<FormReg> {
   final TextEditingController _controladorTitulo = TextEditingController();
   final TextEditingController _controladorResumo = TextEditingController();
+  final TextEditingController _controladorArquivo = TextEditingController();
   CollectionReference registros =
       FirebaseFirestore.instance.collection('registros');
   FilePickerResult result;
@@ -42,6 +43,7 @@ class FormRegState extends State<FormReg> {
     if (result != null) {
       PlatformFile file = result.files.first;
       print("name: " + file.name);
+      _controladorArquivo.text = file.name;
     }
   }
 
@@ -59,14 +61,15 @@ class FormRegState extends State<FormReg> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150),
+            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150, true),
             Editor(
                 _controladorResumo,
                 "Faça uma breve descrição da sua proposta",
                 "Explique da melhor forma que conseguir sobre o que se trata a proposta",
                 5,
                 _valida,
-                600),
+                600, true),
+            Editor(_controladorArquivo, "Arquivo", "Arquivo selecionado", 1, _valida, 150, false),
             ElevatedButton(
               onPressed: () {
                 _selecionaArquivo();
@@ -138,7 +141,6 @@ class FormRegState extends State<FormReg> {
         'userId': userDao.userId(),
         'nomeArq' : file.name
       }).then((value) {
-
         // finaliza a barra
         const SnackBar snackBar =
             SnackBar(content: Text("Seu registro foi realizado com sucesso! "));
@@ -151,6 +153,7 @@ class FormRegState extends State<FormReg> {
     }
     setState(() {
       _isLoading = false;
+
     });
 
     //Limpando os campos após a criação da proposta

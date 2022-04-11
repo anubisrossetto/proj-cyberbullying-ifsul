@@ -8,8 +8,9 @@ class Editor extends StatelessWidget {
   final int lines;
   final bool valida;
   final int qtdCaracteres;
+  final bool enable;
 
-  Editor(this.controlador, this.rotulo, this.dica, this.lines, this.valida, this.qtdCaracteres);
+  Editor(this.controlador, this.rotulo, this.dica, this.lines, this.valida, this.qtdCaracteres, this.enable);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class Editor extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18.0,
           ),
+          enabled: this.enable,
           maxLines: lines,
           decoration: InputDecoration(
             labelText: rotulo,
