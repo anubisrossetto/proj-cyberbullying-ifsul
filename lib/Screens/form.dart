@@ -59,48 +59,42 @@ class FormRegState extends State<FormReg> {
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150, true),
-            Editor(
-                _controladorResumo,
-                "Faça uma breve descrição da sua proposta",
-                "Explique da melhor forma que conseguir sobre o que se trata a proposta",
-                5,
-                _valida,
-                600, true),
-            Editor(_controladorArquivo, "Arquivo", "Arquivo selecionado", 1, _valida, 150, false),
-            ElevatedButton(
-              onPressed: () {
-                _selecionaArquivo();
-              },
-              child: const Text('Selecionar arquivo'),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 40,
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _controladorTitulo.text.isEmpty
-                          ? _valida = true
-                          : _valida = false;
-                      _controladorResumo.text.isEmpty
-                          ? _valida = true
-                          : _valida = false;
-                    });
-                    if (!_valida) {
-                      _criar(context);
-                    }
-                  },
-                  child: const Text("CONFIRMAR")),
-            ),
-            _isLoading ? LinearProgressIndicator() : Container(),
-          ],
-        ),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150, true),
+          Editor(
+              _controladorResumo,
+              "Faça uma breve descrição da sua proposta",
+              "Explique da melhor forma que conseguir sobre o que se trata a proposta",
+              5,
+              _valida,
+              600,
+              true),
+          Editor(_controladorArquivo, "Arquivo", "Arquivo selecionado", 1,
+              _valida, 150, false),
+          ElevatedButton(
+            onPressed: () {
+              _selecionaArquivo();
+            },
+            child: const Text('Selecionar arquivo'),
+          ),
+        ]),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              _controladorTitulo.text.isEmpty
+                  ? _valida = true
+                  : _valida = false;
+              _controladorResumo.text.isEmpty
+                  ? _valida = true
+                  : _valida = false;
+            });
+            if (!_valida) {
+              _criar(context);
+            }
+          },
+          backgroundColor: Colors.green,
+          child: const Icon(Icons.save)),
     );
   }
 
@@ -140,7 +134,7 @@ class FormRegState extends State<FormReg> {
         'dataHora': dataHora,
         'cid': cid,
         'userId': userDao.userId(),
-        'nomeArq' : file.name
+        'nomeArq': file.name
       }).then((value) {
         // finaliza a barra
         const SnackBar snackBar =
@@ -170,7 +164,6 @@ class FormRegState extends State<FormReg> {
     }
     setState(() {
       _isLoading = false;
-
     });
 
     //Limpando os campos após a criação da proposta
