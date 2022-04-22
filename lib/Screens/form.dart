@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:http_parser/http_parser.dart';
 import 'dart:convert';
 import 'package:projcyberbullying/Data/User_dao.dart';
+import 'package:date_format/date_format.dart';
 
 import 'package:provider/provider.dart';
 
@@ -127,7 +128,7 @@ class FormRegState extends State<FormReg> {
 
       request.files.add(pic);
       var response = await request.send();
-      var responseData = await response.stream.toBytes();
+     var responseData = await response.stream.toBytes();
       var responseString = String.fromCharCodes(responseData);
       print(responseString);
       var dados = jsonDecode(responseString); // dynamic
@@ -147,9 +148,25 @@ class FormRegState extends State<FormReg> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }).catchError((error) => debugPrint("Ocorreu um erro: $error"));
     } else {
-      const SnackBar snackBar =
-          SnackBar(content: Text("Problema ao registrar documento "));
+      final snackBar = SnackBar(
+        content: const Text("Problema ao registrar documento"),
+        action: SnackBarAction(
+          label: 'Ok',
+          onPressed: () {
+            // Some code to undo the change.
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+        ),
+        duration: Duration(days: 1),
+      );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+      print(DateTime.now().millisecondsSinceEpoch);
+      int input = 1648747120432;
+      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(input);
+      print(date1);
+      String result1 = formatDate(date1, [dd, '/', mm, '/', yyyy]);
+      print(result1);
     }
     setState(() {
       _isLoading = false;
