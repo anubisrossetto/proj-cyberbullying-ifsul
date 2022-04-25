@@ -104,7 +104,7 @@ class Item extends StatelessWidget {
                                           }));
 
                                           future.then((reg) {
-                                            debugPrint("$reg");
+                                            debugPrint("$reg"); //testes
                                             debugPrint('Dados atualizados');
                                           });
                                         },

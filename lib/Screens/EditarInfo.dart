@@ -6,6 +6,7 @@ import 'package:projcyberbullying/Screens/lista.dart';
 import 'package:conditional_questions/conditional_questions.dart';
 import 'package:projcyberbullying/Data/User_dao.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EditarFormInfo extends StatefulWidget {
   final String titulo;
@@ -26,12 +27,13 @@ class EditarFormInfo extends StatefulWidget {
   }
 }
 
+
 class EditarFormInfoState extends State<EditarFormInfo> {
   final TextEditingController _controladorTitulo = TextEditingController();
   final TextEditingController _controladorResumo = TextEditingController();
 
   bool _valida = false;
-
+///teste
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -112,7 +114,12 @@ class EditarFormInfoState extends State<EditarFormInfo> {
                 5,
                 _valida,
                 600, true),
-
+            ElevatedButton(
+              onPressed: () {
+                _abrirArquivo(context);
+              },
+              child: const Text('Abrir arquivo'),
+            ),
 
           ],
         ),
@@ -134,6 +141,21 @@ class EditarFormInfoState extends State<EditarFormInfo> {
           backgroundColor: Colors.green,
           child: const Icon(Icons.save)),    );
   }
+
+  void _abrirArquivo(BuildContext context) async{
+/*
+https://bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i.ipfs.nftstorage.link/ipfs/bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i/relatorio_03032022_125626.pdf
+
+ */
+    //final Uri _url = Uri.parse('https://flutter.dev');
+    String path = "https://" + widget.cid + ".ipfs.nftstorage.link/ipfs/" +
+    widget.cid + "/" + widget.arq;
+    print(path);
+    final Uri _url = Uri.parse(path);
+    if (!await launchUrl(_url)) throw 'Could not launch $_url';
+
+  }
+
 
   void _alterar(BuildContext context) {
     final userDao = Provider.of<UserDao>(context, listen: false);

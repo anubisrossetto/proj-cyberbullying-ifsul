@@ -149,7 +149,7 @@ class FormRegState extends State<FormReg> {
           onPressed: () {
             // Some code to undo the change.
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
+          }, //////teste
         ),
         duration: Duration(days: 1),
       );
@@ -160,7 +160,7 @@ class FormRegState extends State<FormReg> {
       final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(input);
       print(date1);
       String result1 = formatDate(date1, [dd, '/', mm, '/', yyyy]);
-      print(result1);
+      print(result1); //teste
     }
     setState(() {
       _isLoading = false;

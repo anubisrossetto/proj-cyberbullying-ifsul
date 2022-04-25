@@ -108,7 +108,7 @@ class EditorLogin extends StatelessWidget {
   final bool valida;
   final int qtdCaracteres;
   final bool verdadeOuFalso;
-
+//teste
   EditorLogin(this.controlador, this.rotulo, this.dica, this.icon, this.valida, this.qtdCaracteres, this.verdadeOuFalso);
 
   @override
