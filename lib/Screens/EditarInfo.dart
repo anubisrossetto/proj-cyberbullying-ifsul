@@ -142,7 +142,7 @@ class EditarFormInfoState extends State<EditarFormInfo> {
               _alterar(context);
             }
           },
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF2E7D32),
           child: const Icon(Icons.save)),
     );
   }

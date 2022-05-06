@@ -93,7 +93,7 @@ class FormRegState extends State<FormReg> {
               _criar(context);
             }
           },
-          backgroundColor: Colors.green,
+          backgroundColor: Color(0xFF2E7D32),
           child: const Icon(Icons.save)),
     );
   }
@@ -122,7 +122,7 @@ class FormRegState extends State<FormReg> {
 
       request.files.add(pic);
       var response = await request.send();
-     var responseData = await response.stream.toBytes();
+      var responseData = await response.stream.toBytes();
       var responseString = String.fromCharCodes(responseData);
       print(responseString);
       var dados = jsonDecode(responseString); // dynamic
@@ -145,6 +145,7 @@ class FormRegState extends State<FormReg> {
       final snackBar = SnackBar(
         content: const Text("Problema ao registrar documento"),
         action: SnackBarAction(
+          textColor: const Color(0xFF66BB6A),
           label: 'Ok',
           onPressed: () {
             // Some code to undo the change.
