@@ -17,8 +17,8 @@ class EditarFormInfo extends StatefulWidget {
 
   final QueryDocumentSnapshot updateDados;
 
-  const EditarFormInfo(
-      this.titulo, this.resumo, this.dataHora, this.cid, this.arq, this.updateDados);
+  const EditarFormInfo(this.titulo, this.resumo, this.dataHora, this.cid,
+      this.arq, this.updateDados);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,21 +27,22 @@ class EditarFormInfo extends StatefulWidget {
   }
 }
 
-
 class EditarFormInfoState extends State<EditarFormInfo> {
   final TextEditingController _controladorTitulo = TextEditingController();
   final TextEditingController _controladorResumo = TextEditingController();
+  final TextEditingController _controladorArquivo = TextEditingController();
 
   bool _valida = false;
-///teste
+
+  ///teste
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
-
     //Replacing the spaces with the information from the card -> Retornando os valores para os campos de texto
     _controladorTitulo.text = widget.titulo;
-    _controladorResumo.text = widget.resumo + "  - " + widget.cid + "  -  "+ widget.arq;
+    _controladorResumo.text = widget.resumo;
+    _controladorArquivo.text = widget.arq;
 
     return Scaffold(
       appBar: AppBar(
@@ -106,21 +107,24 @@ class EditarFormInfoState extends State<EditarFormInfo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Editor(_controladorTitulo, "Título", "Título", 1, _valida, 150, true),
+            Editor(
+                _controladorTitulo, "Título", "Título", 1, _valida, 150, true),
             Editor(
                 _controladorResumo,
                 "Faça uma breve descrição",
                 "Explique da melhor forma que conseguir sobre o que se trata o registro",
                 5,
                 _valida,
-                600, true),
+                600,
+                true),
+            Editor(_controladorArquivo, "Arquivo", "Nome do arquivo", 1,
+                _valida, 150, false),
             ElevatedButton(
               onPressed: () {
                 _abrirArquivo(context);
               },
               child: const Text('Abrir arquivo'),
             ),
-
           ],
         ),
       ),
@@ -139,23 +143,26 @@ class EditarFormInfoState extends State<EditarFormInfo> {
             }
           },
           backgroundColor: Colors.green,
-          child: const Icon(Icons.save)),    );
+          child: const Icon(Icons.save)),
+    );
   }
 
-  void _abrirArquivo(BuildContext context) async{
+  void _abrirArquivo(BuildContext context) async {
 /*
 https://bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i.ipfs.nftstorage.link/ipfs/bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i/relatorio_03032022_125626.pdf
 
  */
     //final Uri _url = Uri.parse('https://flutter.dev');
-    String path = "https://" + widget.cid + ".ipfs.nftstorage.link/ipfs/" +
-    widget.cid + "/" + widget.arq;
+    String path = "https://" +
+        widget.cid +
+        ".ipfs.nftstorage.link/ipfs/" +
+        widget.cid +
+        "/" +
+        widget.arq;
     print(path);
     final Uri _url = Uri.parse(path);
     if (!await launchUrl(_url)) throw 'Could not launch $_url';
-
   }
-
 
   void _alterar(BuildContext context) {
     final userDao = Provider.of<UserDao>(context, listen: false);
