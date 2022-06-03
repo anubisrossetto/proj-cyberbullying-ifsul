@@ -173,7 +173,7 @@ https://bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i.ipfs.nftstor
     widget.updateDados.reference
         .update({
           'titulo': _controladorTitulo.text,
-          'resumo': _controladorResumo.text,
+          'Resumo': _controladorResumo.text,
         })
         .then((value) =>
             debugPrint("Seu registro foi atualizado no banco de dados"))
