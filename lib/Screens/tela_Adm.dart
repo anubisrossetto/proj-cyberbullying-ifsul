@@ -19,7 +19,8 @@ class _AdmAppState extends State<AdmApp> {
 
   final styleText = const TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
-  final styleTextTitle = const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  final styleTextTitle =
+      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,6 @@ class _AdmAppState extends State<AdmApp> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               Padding(
                 padding: const EdgeInsets.all(45),
                 child: Text(
@@ -45,11 +45,13 @@ class _AdmAppState extends State<AdmApp> {
               ),
 
               //We are calling the EditorLogin to give our password and email
-              EditorLogin(_emailController, 'Email', 'Email', const Icon(Icons.email_outlined), _valida, 25, false),
+              EditorLogin(_emailController, 'Email', 'Email',
+                  const Icon(Icons.email_outlined), _valida, 25, false, true),
 
               const SizedBox(height: 10),
 
-              EditorLogin(_passwordController, 'Senha','Senha', const Icon(Icons.lock_outline), _valida, 10, true),
+              EditorLogin(_passwordController, 'Senha', 'Senha',
+                  const Icon(Icons.lock_outline), _valida, 10, true, true),
 
               const SizedBox(height: 10),
 
@@ -59,25 +61,28 @@ class _AdmAppState extends State<AdmApp> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      _emailController.text.isEmpty ? _valida = true : _valida = false;
-                      _passwordController.text.isEmpty ? _valida = true : _valida = false;
+                      _emailController.text.isEmpty
+                          ? _valida = true
+                          : _valida = false;
+                      _passwordController.text.isEmpty
+                          ? _valida = true
+                          : _valida = false;
                     });
 
-                    if(!_valida){
+                    if (!_valida) {
                       // userDao.login(_emailController.text, _passwordController.text);
                     }
                   },
-                  child: Text("ENTRAR", style: GoogleFonts.roboto(textStyle: styleText)),
+                  child: Text("ENTRAR",
+                      style: GoogleFonts.roboto(textStyle: styleText)),
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(29),
-                      )
-                  ),
+                    borderRadius: BorderRadius.circular(29),
+                  )),
                 ),
               ),
             ],
           ),
-        )
-    );
+        ));
   }
 }

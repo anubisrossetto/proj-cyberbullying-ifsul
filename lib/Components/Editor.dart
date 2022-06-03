@@ -10,7 +10,8 @@ class Editor extends StatelessWidget {
   final int qtdCaracteres;
   final bool enable;
 
-  Editor(this.controlador, this.rotulo, this.dica, this.lines, this.valida, this.qtdCaracteres, this.enable);
+  Editor(this.controlador, this.rotulo, this.dica, this.lines, this.valida,
+      this.qtdCaracteres, this.enable);
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,11 @@ class Editor extends StatelessWidget {
             errorText: valida ? 'Campo obrigatório!' : null,
             border: const OutlineInputBorder(),
           ),
-        )
-    );
+        ));
   }
 }
 
-class EditorDropdownButton extends StatefulWidget{
+class EditorDropdownButton extends StatefulWidget {
   final TextStyle style;
   String optionSelected;
 
@@ -48,7 +48,6 @@ class EditorDropdownButton extends StatefulWidget{
 }
 
 class _EditorDropdownButtonState extends State<EditorDropdownButton> {
-
   final List<String> buttonOptions = [
     'Comunicação',
     'Cultura',
@@ -70,18 +69,17 @@ class _EditorDropdownButtonState extends State<EditorDropdownButton> {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text('Qual a área do conhecimento que você acha que mais se aproxima da sua proposta?',
+            child: Text(
+              'Qual a área do conhecimento que você acha que mais se aproxima da sua proposta?',
               style: GoogleFonts.cabin(textStyle: widget.style),
             ),
           ),
-
           const SizedBox(height: 10),
-
           DropdownButtonFormField(
-
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              helperText: 'Qual a área do conhecimento que você acha que mais se aproxima da sua proposta?',
+              helperText:
+                  'Qual a área do conhecimento que você acha que mais se aproxima da sua proposta?',
               hintText: 'Selecione a área temática',
               //errorText: widget.valida ? 'Campo obrigatório!' : null,
             ),
@@ -100,21 +98,22 @@ class _EditorDropdownButtonState extends State<EditorDropdownButton> {
 }
 
 class EditorLogin extends StatelessWidget {
-
   final TextEditingController controlador;
   final String rotulo;
   final String dica;
   final Icon icon;
   final bool valida;
   final int qtdCaracteres;
-  final bool verdadeOuFalso;
+  final bool hidden;
+  final bool readOnly;
 //teste
-  EditorLogin(this.controlador, this.rotulo, this.dica, this.icon, this.valida, this.qtdCaracteres, this.verdadeOuFalso);
+  EditorLogin(this.controlador, this.rotulo, this.dica, this.icon, this.valida,
+      this.qtdCaracteres, this.hidden, this.readOnly);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-   // Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
 
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
@@ -123,7 +122,7 @@ class EditorLogin extends StatelessWidget {
           borderRadius: BorderRadius.circular(29),
         ),
         child: TextField(
-          obscureText: verdadeOuFalso,
+          obscureText: hidden,
           //maxLength: qtdCaracteres,
           controller: controlador,
           style: const TextStyle(
@@ -137,8 +136,8 @@ class EditorLogin extends StatelessWidget {
             //helperText: dica,
             errorText: valida ? 'Campo obrigatório!' : null,
             border: InputBorder.none,
+            enabled: this.readOnly,
           ),
-        )
-    );
+        ));
   }
 }

@@ -148,11 +148,6 @@ class EditarFormInfoState extends State<EditarFormInfo> {
   }
 
   void _abrirArquivo(BuildContext context) async {
-/*
-https://bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i.ipfs.nftstorage.link/ipfs/bafybeigs5leg5kwgnjy7le5badrwpy5dtu4bschktypr2n34fjiqpdwq7i/relatorio_03032022_125626.pdf
-
- */
-    //final Uri _url = Uri.parse('https://flutter.dev');
     String path = "https://" +
         widget.cid +
         ".ipfs.nftstorage.link/ipfs/" +
