@@ -12,8 +12,8 @@ class Informacao extends StatelessWidget {
       "transparente, soluciondo a burocracia que seria o seu registro.";
 
   String texto2 =
-      "Para realizar as capturas, foi criada uma extensão complementar à aplicação, " +
-          "que pode ser obtida AQUI. Ao utilizá-la, é possível gerar um PDF " +
+      "Para realizar as capturas, foi criada uma extensão complementar à aplicação." +
+          " Ao utilizá-la, é possível gerar um PDF " +
           "contendo uma captura de tela de qualquer página da web, assim como um conjunto de dados " +
           "sobre a captura, coletados em via a validá-la.";
 
