@@ -131,10 +131,7 @@ class AppBarLogo extends StatelessWidget {
     // TODO: implement build
     return  Column(
       children: [
-        Text(
-          'Registro de Provas de Cyberbullying',
-          style: GoogleFonts.cabin(textStyle: styleTextTitle),
-        ),
+        Image.asset("assets/image/horizontalCropped.png", width: 316, height: 80,)
       ],
     );
   }

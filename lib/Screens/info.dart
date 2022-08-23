@@ -29,7 +29,7 @@ class Informacao extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 100,
-          title: Text("Nome app"),
+          title: Image.asset("assets/image/horizontalCropped.png", width: 316, height: 80,),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

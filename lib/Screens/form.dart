@@ -54,7 +54,8 @@ class FormRegState extends State<FormReg> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Formulário de Envio'),
+        toolbarHeight: 100,
+        title: Image.asset("assets/image/horizontalCropped.png", width: 316, height: 80,),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

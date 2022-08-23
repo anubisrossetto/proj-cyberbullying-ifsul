@@ -131,11 +131,6 @@ class _LoginState extends State<Login> {
 
               CadastrarConta(styleText, firstTextNavigation,
                   secondTextNavigation, () => setFormAction(!isLogin)),
-
-              ContaAdministrador(styleText),
-
-              Padding(
-                  padding: const EdgeInsets.only(top: 15), child: Divisor()),
             ],
           ),
         ));
@@ -172,31 +167,3 @@ class CadastrarConta extends StatelessWidget {
   }
 }
 
-class ContaAdministrador extends StatelessWidget {
-  final TextStyle styleText;
-
-  const ContaAdministrador(this.styleText);
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Text('Entrar como',
-          style:
-              GoogleFonts.cabin(textStyle: styleText, color: Colors.grey[700])),
-      GestureDetector(
-        onTap: () {
-          debugPrint('Página de login do administrador');
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AdmApp(),
-              ));
-        },
-        child: Text(' administrador',
-            style:
-                GoogleFonts.cabin(textStyle: styleText, color: Colors.black)),
-      )
-    ]);
-  }
-}
