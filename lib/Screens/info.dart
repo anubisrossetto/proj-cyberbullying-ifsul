@@ -9,18 +9,18 @@ class Informacao extends StatelessWidget {
   String texto1 = "Spearmint é uma ferramenta para armazenamento de provas de " +
       "cyberbullying por meio de tecnologias distribuídas, garantindo, " +
       "assim, a impermutabilidade desses dados e seu fácil armazenamento de forma " +
-      "transparente, soluciondo a burocracia que seria o seu registro.";
+      "transparente, soluciondo a burocracia que seria o seu registro convencional.";
 
   String texto2 =
-      "Para realizar as capturas, foi criada uma extensão complementar à aplicação." +
-          " Ao utilizá-la, é possível gerar um PDF " +
+      "Para realizar as capturas, foi criada uma extensão complementar à aplicação, " +
+          " ela gera um documento PDF " +
           "contendo uma captura de tela de qualquer página da web, assim como um conjunto de dados " +
           "sobre a captura, coletados em via a validá-la.";
 
   String texto3 = "As provas são armazenadas em um sistema chamado IPFS, Interplanetary File System, " +
       "que, armazenando dados de forma distribuída, garante que sejam imutáveis e " +
       "sempre acessíveis, enquanto a indexação de tais dados com os usuários " +
-      "é feita por meio da tecnologia Blockchain, tornando esses registros permanentes" +
+      "é feita por meio da tecnologia Blockchain, tornando esses registros permanentes " +
       "em um sistema confiável.";
 
   @override

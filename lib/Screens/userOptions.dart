@@ -31,7 +31,7 @@ class MoreOptions extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'Mais Serviços',
+                'Opções',
                 style: GoogleFonts.quicksand(textStyle: styleTextTitle),
               ),
             ),
@@ -47,6 +47,17 @@ class MoreOptions extends StatelessWidget {
                       return MyProfile();
                     }));
                   }, Theme.of(context).colorScheme.primary),
+
+                  const SizedBox(height: 10),
+                  Options(Icons.list, 'Meus Registros',
+                      'Visualize seus registros de provas', () {
+                    debugPrint("Página Lista");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListaReg();
+                    }));
+                  }, Theme.of(context).colorScheme.primary),
+
                   const SizedBox(height: 10),
                   Options(Icons.feedback_outlined, 'Mais Informações',
                       'Consulte mais informações de como funciona o registro',
@@ -57,15 +68,7 @@ class MoreOptions extends StatelessWidget {
                       return Informacao();
                     }));
                   }, Theme.of(context).colorScheme.primary),
-                  const SizedBox(height: 10),
-                  Options(Icons.list, 'Meus Registros',
-                      'Visualize seus registros de provas', () {
-                    debugPrint("Página Lista");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ListaReg();
-                    }));
-                  }, Theme.of(context).colorScheme.primary),
+
                   const SizedBox(height: 10),
                   Options(Icons.logout, 'Sair',
                       'Desconectar sua conta desse aparelho', () {
