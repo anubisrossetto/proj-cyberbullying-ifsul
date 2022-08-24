@@ -10,15 +10,13 @@ import 'package:intl/intl.dart';
 class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    final userDao = Provider.of<UserDao>(context, listen: false);
-
-    final Stream<QuerySnapshot> registros =
-        FirebaseFirestore.instance.collection('registros').snapshots();
-//.where('userID', isEqualTo: userDao.userId()).
-
+    
+    final UserDao userDao = Provider.of<UserDao>(context, listen: false);
+    Query registros = FirebaseFirestore.instance.collection('registros')
+                      .where('userId', isEqualTo: userDao.userId());
+                      
     return StreamBuilder<QuerySnapshot>(
-      stream: registros,
+      stream: registros.snapshots(),
       builder: (
         BuildContext context,
         AsyncSnapshot<QuerySnapshot> snapshot,
@@ -104,8 +102,7 @@ class Item extends StatelessWidget {
                                           }));
 
                                           future.then((reg) {
-                                            debugPrint("$reg"); //testes
-                                            debugPrint('Dados atualizados');
+                                            debugPrint("$reg"); //testes 
                                           });
                                         },
                                       ),
